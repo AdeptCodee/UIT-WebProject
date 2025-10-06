@@ -1,0 +1,85 @@
+/* reset sơ bộ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: serif;
+  line-height: 1.5;
+  color: #000;
+  background-color: #fff;
+  padding: 0px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+.header h1 {
+  font-size: 2em;
+  color: #000080;
+}
+
+.header p {
+  font-size: 1em;
+  color: #000;
+  margin-top: 0.2em;
+}
+
+.intro p {
+  margin-bottom: 0.8em;
+}
+
+.links {
+  margin: 1em 0;
+}
+
+.links ul {
+  list-style: none;
+}
+
+.links li {
+  display: inline;
+  margin-right: 1.2em;
+}
+
+.links a {
+  text-decoration: none;
+  color: #0000EE;
+}
+
+.content p {
+  margin-bottom: 1em;
+}
+
+.content h2 {
+  margin-top: 1.5em;
+  font-size: 1.5em;
+  color: #000080;
+}
+
+.content ul {
+  list-style-type: disc;
+  margin-left: 2em;
+  margin-bottom: 1em;
+}
+
+.content li {
+  margin-bottom: 0.5em;
+}
+
+.footer {
+  margin-top: 2em;
+  font-size: 0.9em;
+  color: #555;
+  border-top: 1px solid #ccc;
+  padding-top: 1em;
+}
