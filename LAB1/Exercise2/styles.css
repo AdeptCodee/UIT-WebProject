@@ -1,85 +1,110 @@
-/* reset sơ bộ */
+/* Xóa mọi margin mặc định của trình duyệt */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Toàn bộ trang chiếm hết chiều ngang, không căn giữa */
 body {
-  font-family: serif;
+  font-family: "Times New Roman", serif;
   line-height: 1.5;
-  color: #000;
-  background-color: #fff;
-  padding: 0px;
+  color: black;
+  background-color: white;
+  width: 100%;
+  padding: 20px;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
+/* Header chứa ảnh + nội dung */
 .header {
-  text-align: left;
-  margin-bottom: 1em;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  width: 100%;
 }
 
-.header h1 {
+/* Ảnh bên trái */
+.profile-pic {
+  width: 250px;
+  height: auto;
+  margin-right: 20px;
+  border: 1px solid #ccc;
+}
+
+/* Text bên phải ảnh */
+.header-text {
+  flex: 1;
+}
+
+.header-text h1,
+.header-text h2 {
+  color: darkblue;
   font-size: 2em;
-  color: #000080;
+  margin-bottom: 0.2em;
 }
 
-.header p {
-  font-size: 1em;
-  color: #000;
-  margin-top: 0.2em;
+.header-text em {
+  font-style: italic;
 }
 
-.intro p {
-  margin-bottom: 0.8em;
-}
-
-.links {
-  margin: 1em 0;
-}
-
-.links ul {
-  list-style: none;
-}
-
-.links li {
-  display: inline;
-  margin-right: 1.2em;
-}
-
-.links a {
+.header-text a {
+  color: blue;
   text-decoration: none;
-  color: #0000EE;
 }
 
-.content p {
-  margin-bottom: 1em;
+.header-text a:hover {
+  text-decoration: underline;
+}
+.education a {
+  color: blue;
+  text-decoration: none;
+}
+.education a:hover {
+  text-decoration: underline;
+}
+.header-text hr {
+  margin: 10px 0;
+  border: 0.5px solid #888;
+}
+.links {
+  margin-left: 100px;
+}
+p {
+  font-size: 20px;
+}
+.experience table {
+  width: 1000px;
+  margin-top: 10px;
+  font-size: 20px;
+  margin-left: 0px;
+  text-align: left;
+  /* width: 1000px; */
+  border: black 1px solid;    
+}
+.skills table {
+  width: 1000px;
+  margin-top: 10px;
+  font-size: 20px;
+  margin-left: 0px;
+  text-align: left;
+  /* max-width: 950px; */
+  border: black 1px solid;
+}
+.subject h3 {
+  font-size: 20px;
+  margin-bottom: 12px; /* tạo khoảng cách giữa h3 và ul */
 }
 
-.content h2 {
-  margin-top: 1.5em;
-  font-size: 1.5em;
-  color: #000080;
+.subject ul {
+  font-size: 20px;
+  margin-left: 50px; /* thụt vào cho đẹp hơn */
+  margin-top: 8px; /* nếu muốn thêm chút khoảng trống phía trên */
 }
-
-.content ul {
-  list-style-type: disc;
-  margin-left: 2em;
-  margin-bottom: 1em;
+.subject ul li {
+  margin-bottom: 8px; /* khoảng cách giữa các mục trong danh sách */
 }
-
-.content li {
-  margin-bottom: 0.5em;
-}
-
-.footer {
-  margin-top: 2em;
-  font-size: 0.9em;
-  color: #555;
-  border-top: 1px solid #ccc;
-  padding-top: 1em;
+.experience th, .skills td {
+    width: 200px;
+    border: black 1px solid;
 }
