@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML5 Form</title>
+  </head>
+  <body>
+    <a href="ex1.html">Exercise 1</a>
+    <a href="ex2.html">Exercise 2</a>
+    <a href="ex3.html">Exercise 3</a>
+    <a href="ex4.html">Exercise 4</a>
+    <hr />
+    <form action="" method="GET" accept-charset="UTF-8">
+      <!-- Nhập họ và tên -->
+      <label for="full-name">Họ và Tên:</label>
+      <input
+        type="text"
+        id="full-name"
+        name="full-name"
+        placeholder="Nhập họ và tên"
+      />
+      <br /><br />
+
+      <!-- Mô tả -->
+      <label for="about-yourself">Mô tả về bạn:</label>
+      <textarea
+        id="about-yourself"
+        name="about-yourself"
+        cols="30"
+        rows="5"
+        placeholder="Giới thiệu ngắn gọn"
+      >hi</textarea>
+      <br /><br />
+      <!-- Select box -->
+      <label for="options">Chọn một mục:</label>
+      <select name="options" id="options">
+        <optgroup label="UIT">
+          <option value="daa">DAA</option>
+          <option value="course">Website môn học</option>
+        </optgroup>
+        <optgroup label="Mạng xã hội">
+          <option value="facebook">Facebook</option>
+          <option value="zalo">Zalo</option>
+        </optgroup>
+      </select>
+      <br /><br />
+
+      <!-- Các nút -->
+      <button type="reset">Xóa dữ liệu</button>
+      <input type="submit" value="Gửi dữ liệu" />
+    </form>
+  </body>
+</html>
