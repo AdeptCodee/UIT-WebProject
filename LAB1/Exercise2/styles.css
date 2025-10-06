@@ -79,8 +79,7 @@ p {
   font-size: 20px;
   margin-left: 0px;
   text-align: left;
-  /* width: 1000px; */
-  border: black 1px solid;    
+  /* border: black 1px solid;     */
 }
 .skills table {
   width: 1000px;
@@ -88,8 +87,7 @@ p {
   font-size: 20px;
   margin-left: 0px;
   text-align: left;
-  /* max-width: 950px; */
-  border: black 1px solid;
+  /* border: black 1px solid; */
 }
 .subject h3 {
   font-size: 20px;
@@ -99,12 +97,12 @@ p {
 .subject ul {
   font-size: 20px;
   margin-left: 50px; /* thụt vào cho đẹp hơn */
-  margin-top: 8px; /* nếu muốn thêm chút khoảng trống phía trên */
+  margin-top: 8px; /* thêm chút khoảng trống phía trên */
 }
 .subject ul li {
   margin-bottom: 8px; /* khoảng cách giữa các mục trong danh sách */
 }
 .experience th, .skills td {
     width: 200px;
-    border: black 1px solid;
+    /* border: black 1px solid; */
 }
