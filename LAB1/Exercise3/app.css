@@ -122,9 +122,6 @@ span:hover {
   font-size: 15px;
   margin-left: 10px;
 }
-.notice-box span {
-  /* user-select: none; */
-}
 .notice-box span:hover {
   /* user-select: none; */
   background-color: transparent;
