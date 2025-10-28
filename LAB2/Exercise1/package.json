@@ -1,5 +1,5 @@
 {
-  "name": "exercise1_1",
+  "name": "exercise_jsx_without_react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,3 +14,4 @@
     "vite": "^7.1.12"
   }
 }
+
