@@ -1,17 +1,20 @@
 {
   "name": "exercise_jsx_without_react",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Lab 2 - JSX without React (Performance Optimization)",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "analyze": "vite build --mode analyze"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "vite": "^7.1.12"
-  }
+    "typescript": "^5.5.3",
+    "vite": "^5.2.10"
+  },
+  "type": "module"
 }
-
