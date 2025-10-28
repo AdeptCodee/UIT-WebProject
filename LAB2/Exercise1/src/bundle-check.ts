@@ -1,8 +1,8 @@
-
-function analyze() {
-  console.log("Analyzing bundle size...");
-  execSync("npx vite build", { stdio: "inherit" });
-  execSync("npx vite build --report", { stdio: "inherit" });
-}
-
-analyze();
+// === Bundle Size Analysis ===
+// TODO: Analyze and optimize bundle size
+// Example commands (run in terminal):
+//
+// npm run build
+// npx vite build --mode production
+// npx vite preview
+// npx vite build --report
