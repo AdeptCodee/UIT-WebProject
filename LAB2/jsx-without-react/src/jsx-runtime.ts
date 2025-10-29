@@ -1,74 +1,79 @@
-
-export type VNode = {
-  type: string | Function | symbol;
+// src/jsx-runtime.ts
+export interface VNode {
+  type: string | Function;
   props: Record<string, any> | null;
-  children: Array<VNode | string | number>;
-};
-
-export function createElement(
-  type: string | Function | symbol,
-  props: Record<string, any> | null,
-  ...children: Array<VNode | string | number>
-): VNode {
-  return { type, props, children };
+  children: (VNode | string | number)[];
 }
 
+// === JSX Runtime Core ===
+export function createElement(
+  type: string | Function,
+  props: Record<string, any> | null,
+  ...children: (VNode | string | number)[]
+): VNode {
+  return {
+    type,
+    props: props || {},
+    children: children.flat().filter((c) => c != null),
+  };
+}
+
+// Thêm hàm createFragment
+export function createFragment(
+  props: Record<string, any> | null,
+  ...children: (VNode | string | number)[]
+): VNode {
+  return createElement("fragment", props, ...children);
+}
+
+// === DOM Rendering ===
 export function renderToDOM(vnode: VNode | string | number): Node {
   if (typeof vnode === "string" || typeof vnode === "number") {
     return document.createTextNode(String(vnode));
   }
 
-  if (vnode.type === Symbol.for("fragment")) {
+  // Handle fragment
+  if (vnode.type === "fragment") {
     const fragment = document.createDocumentFragment();
     vnode.children.forEach((child) => fragment.appendChild(renderToDOM(child)));
     return fragment;
   }
 
+  // Handle functional components
   if (typeof vnode.type === "function") {
-    const componentResult = (vnode.type as Function)({
-      ...(vnode.props || {}),
-      children: vnode.children,
-    });
-    return renderToDOM(componentResult as VNode);
+    return renderToDOM((vnode.type as Function)(vnode.props || {}));
   }
 
+  // Create DOM element
   const el = document.createElement(vnode.type as string);
 
-  if (vnode.props) {
-    for (const [key, value] of Object.entries(vnode.props)) {
-      if (key === "className") {
-        el.setAttribute("class", value);
-      } else if (key === "style" && typeof value === "object") {
-        Object.assign(el.style, value);
-      } else if (key.startsWith("on") && typeof value === "function") {
-        const eventName = key.slice(2).toLowerCase();
-        el.addEventListener(eventName, value);
-      } else if (typeof value === "boolean") {
-        if (value) el.setAttribute(key, "");
-      } else {
-        el.setAttribute(key, String(value));
-      }
+  // Set attributes
+  for (const [key, value] of Object.entries(vnode.props || {})) {
+    if (key.startsWith("on") && typeof value === "function") {
+      el.addEventListener(key.substring(2).toLowerCase(), value);
+    } else if (key === "className") {
+      el.setAttribute("class", value);
+    } else if (key === "style" && typeof value === "object") {
+      Object.assign(el.style, value);
+    } else {
+      el.setAttribute(key, value);
     }
   }
 
-  vnode.children.forEach((child) => {
-    el.appendChild(renderToDOM(child));
-  });
-
+  // Append children
+  vnode.children.forEach((child) => el.appendChild(renderToDOM(child)));
   return el;
 }
 
+// === Mount ===
 export function mount(vnode: VNode, container: HTMLElement): void {
-  const domNode = renderToDOM(vnode);
-  container.appendChild(domNode);
+  container.appendChild(renderToDOM(vnode));
 }
 
-export function useState<T>(initialValue: T): [() => T, (newValue: T) => void] {
-  let value = initialValue;
+// === Simple useState ===
+export function useState<T>(initial: T): [() => T, (val: T) => void] {
+  let value = initial;
   const get = () => value;
-  const set = (newValue: T) => {
-    value = newValue;
-    console.log("State updated:", value);
-  };
+  const set = (v: T) => (value = v);
   return [get, set];
 }

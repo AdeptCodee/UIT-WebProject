@@ -1,8 +1,8 @@
+// vite.config.ts
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  root: ".",
-  build: {
-    outDir: "dist",
+  esbuild: {
+    jsxInject: `import { createElement, createFragment } from './src/jsx-runtime'`,
   },
 });
