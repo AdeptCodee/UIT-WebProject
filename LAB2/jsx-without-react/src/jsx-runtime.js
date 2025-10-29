@@ -32,4 +32,5 @@ function createFragment(props) {
 }
 exports.h = createElement;
 exports.Fragment = createFragment;
-
+var vnode = createElement("div", { className: "test" }, "Hello World");
+console.log(vnode);
