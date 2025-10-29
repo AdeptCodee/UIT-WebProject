@@ -1,7 +1,7 @@
-/** @jsx createElement */
-import { createElement, useState } from "./jsx-runtime";
+/** @jsx h */
+import { h, useState } from "./jsx-runtime";
+import "./styles/todo.css";
 
- // Define TypeScript interfaces
 interface Todo {
   id: number;
   text: string;
@@ -21,45 +21,34 @@ interface TodoListProps {
   onDelete: (id: number) => void;
 }
 
- // TodoItem component
 const TodoItem = ({ todo, onToggle, onDelete }: TodoItemProps) => {
-  const textStyle = {
-    textDecoration: todo.completed ? "line-through" : "none",
-  };
-
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        margin: "4px 0",
-      }}
-    >
+    <div className={`todo-item ${todo.completed ? "completed" : ""}`}>
       <input
         type="checkbox"
         checked={todo.completed}
         onChange={() => onToggle(todo.id)}
       />
-      <span style={textStyle}>{todo.text}</span>
-      <button onClick={() => onDelete(todo.id)}>Delete</button>
+      <span>{todo.text}</span>
+      <button onClick={() => onDelete(todo.id)} className="delete-button">
+        Delete
+      </button>
     </div>
   );
 };
 
-// TodoList component
 const TodoList = ({ todos, onToggle, onDelete }: TodoListProps) => {
   return (
-    <div>
+    <div className="todo-list">
       {todos.map((todo) => (
-        <TodoItem todo={todo} onToggle={onToggle} onDelete={onDelete} />
+        <div key={todo.id}>
+          <TodoItem todo={todo} onToggle={onToggle} onDelete={onDelete} />
+        </div>
       ))}
     </div>
   );
 };
 
-
-// AddTodoForm component
 const AddTodoForm = ({ onAdd }: { onAdd: (text: string) => void }) => {
   const [getInput, setInput] = useState("");
 
@@ -72,21 +61,26 @@ const AddTodoForm = ({ onAdd }: { onAdd: (text: string) => void }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="todo-form">
       <input
         type="text"
         value={getInput()}
         onInput={(e: any) => setInput(e.target.value)}
-        placeholder="Enter a new task..."
+        placeholder="Add a new task..."
+        className="todo-input"
       />
-      <button type="submit">Add</button>
+      <button type="submit" className="todo-button">
+        Add
+      </button>
     </form>
   );
 };
 
-// Main TodoApp component
 const TodoApp = () => {
   const [getTodos, setTodos] = useState<Todo[]>([]);
+  const [getFilter, setFilter] = useState<"all" | "active" | "completed">(
+    "all"
+  );
 
   const addTodo = (text: string) => {
     const newTodo: Todo = {
@@ -110,23 +104,51 @@ const TodoApp = () => {
     setTodos(getTodos().filter((todo) => todo.id !== id));
   };
 
+  const filteredTodos = getTodos().filter((todo) => {
+    if (getFilter() === "active") return !todo.completed;
+    if (getFilter() === "completed") return todo.completed;
+    return true;
+  });
+
   const total = getTodos().length;
   const completed = getTodos().filter((t) => t.completed).length;
 
   return (
-    <div
-      style={{ fontFamily: "sans-serif", maxWidth: "400px", margin: "auto" }}
-    >
+    <div className="todo-app">
       <h2>Todo List</h2>
       <AddTodoForm onAdd={addTodo} />
+      <div className="todo-filters">
+        <button
+          onClick={() => setFilter("all")}
+          className={`filter-button ${getFilter() === "all" ? "active" : ""}`}
+        >
+          All
+        </button>
+        <button
+          onClick={() => setFilter("active")}
+          className={`filter-button ${
+            getFilter() === "active" ? "active" : ""
+          }`}
+        >
+          Active
+        </button>
+        <button
+          onClick={() => setFilter("completed")}
+          className={`filter-button ${
+            getFilter() === "completed" ? "active" : ""
+          }`}
+        >
+          Completed
+        </button>
+      </div>
       <TodoList
-        todos={getTodos()}
+        todos={filteredTodos}
         onToggle={toggleTodo}
         onDelete={deleteTodo}
       />
-      <p>
+      <div className="todo-summary">
         Total: {total} | Completed: {completed}
-      </p>
+      </div>
     </div>
   );
 };

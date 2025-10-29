@@ -98,6 +98,9 @@ export function mount(vnode: VNode, container: HTMLElement): void {
   container.appendChild(domNode);
 }
 
+let currentComponent: (() => VNode) | null = null;
+let rootContainer: HTMLElement | null = null;
+
 export function useState<T>(initialValue: T): [() => T, (newValue: T) => void] {
   let value: T = initialValue;
 
@@ -107,7 +110,21 @@ export function useState<T>(initialValue: T): [() => T, (newValue: T) => void] {
 
   const setValue = (newValue: T): void => {
     value = newValue;
+    if (currentComponent && rootContainer) {
+      const vnode = currentComponent();
+      rootContainer.innerHTML = '';
+      rootContainer.appendChild(renderToDOM(vnode));
+    }
   };
 
   return [getValue, setValue];
+}
+
+export function mountWithUpdates(vnode: VNode, container: HTMLElement): void {
+  if (typeof vnode.type === 'function') {
+    const componentFn = vnode.type as ComponentFunction;
+    currentComponent = () => componentFn(vnode.props);
+    rootContainer = container;
+  }
+  mount(vnode, container);
 }

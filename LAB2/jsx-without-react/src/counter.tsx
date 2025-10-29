@@ -1,5 +1,5 @@
-/** @jsx createElement */
-import { createElement, useState } from "./jsx-runtime";
+/** @jsx h */
+import { h, useState } from "./jsx-runtime";
 
 interface ButtonProps {
   onClick?: () => void;
