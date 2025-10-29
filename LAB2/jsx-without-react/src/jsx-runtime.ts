@@ -32,3 +32,5 @@ export function createFragment(
 
 export const h = createElement;
 export const Fragment = createFragment;
+const vnode = createElement("div", { className: "test" }, "Hello World");
+console.log(vnode);
