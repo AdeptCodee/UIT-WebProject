@@ -1,24 +1,37 @@
-// src/jsx-runtime.ts
+export interface ComponentProps {
+  children?: (VNode | string | number)[];
+  [key: string]: any;
+}
+
+export type ComponentFunction = (props: ComponentProps) => VNode;
+
 export interface VNode {
-  type: string | Function;
-  props: Record<string, any> | null;
+  type: string | ComponentFunction;
+  props: Record<string, any>;
   children: (VNode | string | number)[];
 }
 
-// === JSX Runtime Core ===
 export function createElement(
-  type: string | Function,
+  type: string | ComponentFunction,
   props: Record<string, any> | null,
   ...children: (VNode | string | number)[]
 ): VNode {
+  const processedProps = props || {};
+
+  const finalChildren = children
+    .flat()
+    .filter(
+      (child) =>
+        child !== null && child !== undefined && typeof child !== "boolean"
+    );
+
   return {
-    type,
-    props: props || {},
-    children: children.flat().filter((c) => c != null),
+    type: type,
+    props: processedProps,
+    children: finalChildren,
   };
 }
 
-// Thêm hàm createFragment
 export function createFragment(
   props: Record<string, any> | null,
   ...children: (VNode | string | number)[]
@@ -26,54 +39,75 @@ export function createFragment(
   return createElement("fragment", props, ...children);
 }
 
-// === DOM Rendering ===
+export { createElement as h, createFragment as Fragment };
+
 export function renderToDOM(vnode: VNode | string | number): Node {
   if (typeof vnode === "string" || typeof vnode === "number") {
     return document.createTextNode(String(vnode));
   }
 
-  // Handle fragment
   if (vnode.type === "fragment") {
     const fragment = document.createDocumentFragment();
-    vnode.children.forEach((child) => fragment.appendChild(renderToDOM(child)));
+    vnode.children.forEach((child) => {
+      fragment.appendChild(renderToDOM(child));
+    });
     return fragment;
   }
 
-  // Handle functional components
   if (typeof vnode.type === "function") {
-    return renderToDOM((vnode.type as Function)(vnode.props || {}));
+    const componentNode = vnode.type({
+      ...vnode.props,
+      children: vnode.children,
+    });
+    return renderToDOM(componentNode);
   }
 
-  // Create DOM element
-  const el = document.createElement(vnode.type as string);
+  const element = document.createElement(vnode.type);
 
-  // Set attributes
-  for (const [key, value] of Object.entries(vnode.props || {})) {
+  Object.keys(vnode.props).forEach((key) => {
+    const value = vnode.props[key];
     if (key.startsWith("on") && typeof value === "function") {
-      el.addEventListener(key.substring(2).toLowerCase(), value);
+      const eventName = key.substring(2).toLowerCase();
+      element.addEventListener(eventName, value);
     } else if (key === "className") {
-      el.setAttribute("class", value);
+      element.className = String(value);
     } else if (key === "style" && typeof value === "object") {
-      Object.assign(el.style, value);
-    } else {
-      el.setAttribute(key, value);
+      Object.keys(value).forEach((styleKey) => {
+        (element.style as any)[styleKey] = value[styleKey];
+      });
+    } else if (typeof value === "boolean") {
+      if (value) {
+        (element as any)[key] = true;
+        element.setAttribute(key, "");
+      }
+    } else if (value !== null && value !== undefined) {
+      element.setAttribute(key, String(value));
     }
-  }
+  });
 
-  // Append children
-  vnode.children.forEach((child) => el.appendChild(renderToDOM(child)));
-  return el;
+  vnode.children.forEach((child) => {
+    element.appendChild(renderToDOM(child));
+  });
+
+  return element;
 }
 
-// === Mount ===
 export function mount(vnode: VNode, container: HTMLElement): void {
-  container.appendChild(renderToDOM(vnode));
+  container.innerHTML = "";
+  const domNode = renderToDOM(vnode);
+  container.appendChild(domNode);
 }
 
-// === Simple useState ===
-export function useState<T>(initial: T): [() => T, (val: T) => void] {
-  let value = initial;
-  const get = () => value;
-  const set = (v: T) => (value = v);
-  return [get, set];
+export function useState<T>(initialValue: T): [() => T, (newValue: T) => void] {
+  let value: T = initialValue;
+
+  const getValue = (): T => {
+    return value;
+  };
+
+  const setValue = (newValue: T): void => {
+    value = newValue;
+  };
+
+  return [getValue, setValue];
 }
