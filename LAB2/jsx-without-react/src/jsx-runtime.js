@@ -6,5 +6,5 @@ export {
   createFragment as Fragment,
   mount,
   useState,
-  renderToDOM
-} from './jsx-runtime.ts';
+  renderToDOM,
+} from "./jsx-runtime.ts";
