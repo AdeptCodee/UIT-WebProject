@@ -2,6 +2,7 @@
 import React from "react";
 import UserProfile from "./UserProfile";
 import "./App.css"; // nếu bạn dùng CSS
+import Counter from "./Counter";
 
 function App() {
   const user1 = {
@@ -22,11 +23,14 @@ function App() {
 
   return (
     <div>
-      {/* user1 dùng theme mặc định 'light' */}
+      {/* user1 dùng theme 'light' */}
       <UserProfile userData={user1} />
 
       {/* user2 dùng theme 'dark' */}
       <UserProfile userData={user2} theme="dark" />
+
+      {/* bộ đếm */}
+      <Counter />
     </div>
   );
 }
