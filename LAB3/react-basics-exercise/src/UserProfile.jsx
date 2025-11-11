@@ -2,7 +2,7 @@ function UserProfile() {
       const user = {
         name: "Adept Truong",
         email: "adept.truong@example.com",
-        avatarUrl: "https://i.imgur.com/yXOvdOSs.jpg",
+        avatarUrl: "https://i.ytimg.com/vi/yEdpUOOisFA/maxresdefault.jpg",
         imageSize: 90,
       };
   return (
