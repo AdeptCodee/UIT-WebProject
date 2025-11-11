@@ -5,8 +5,8 @@ import "./App.css"; // nếu bạn dùng CSS
 
 function App() {
   const user1 = {
-    name: "Adept Truong",
-    email: "adept.truong@example.com",
+    name: "Ngoc Nguyen",
+    email: "ngoc.nguyen@example.com",
     avatarUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-TcgnJCA-vBzr8hutHs03uFDlLm8-vmA5Ng&s",
     imageSize: 90,
