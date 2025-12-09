@@ -1,15 +1,11 @@
 import React, { useReducer, useEffect } from "react";
 
-// 1. Định nghĩa trạng thái ban đầu (Initial State)
-// Mình gom hết vào một object cho gọn theo đề bài
 const initialState = {
   status: "idle", // Các trạng thái: 'idle' | 'loading' | 'resolved' | 'rejected'
   data: null,
   error: null,
 };
 
-// 2. Viết hàm reducer để xử lý logic
-// Hàm này nhận vào state cũ và action, trả về state mới
 function fetchReducer(state, action) {
   switch (action.type) {
     case "FETCH_INIT":
@@ -17,8 +13,6 @@ function fetchReducer(state, action) {
       return { ...state, status: "loading", error: null };
 
     case "FETCH_SUCCESS":
-      // Challenge: Chỉ cho phép thành công nếu đang ở trạng thái loading
-      // Để tránh trường hợp component bị unmount hoặc request bị hủy mà vẫn set state
       if (state.status === "loading") {
         return {
           ...state,
@@ -62,7 +56,7 @@ const UserProfile = () => {
   useEffect(() => {
     // Hàm giả lập việc gọi API
     const fetchData = async () => {
-      // Bắn action báo là "Tao bắt đầu lấy dữ liệu nha"
+      // Bắn action báo 
       dispatch({ type: "FETCH_INIT" });
 
       try {

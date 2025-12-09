@@ -19,7 +19,7 @@ const ShoppingCart = () => {
   // Lấy dữ liệu từ Store ra
   const cartItems = useSelector((state) => state.cart.items);
   const totalAmount = useSelector(selectTotalAmount);
-  const tax = useSelector(selectCartTax); // Cái Challenge thầy yêu cầu nè
+  const tax = useSelector(selectCartTax); 
 
   // Hàm thêm sản phẩm
   const handleAddItem = (product) => {
