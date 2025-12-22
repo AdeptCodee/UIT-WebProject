@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex; /* Sidebar và Content nằm cạnh nhau */
+}
+
+/* Nội dung chính */
+.content {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid black;
+}
+
+/* Hàng 1 */
+.profile-header h2 {
+  color: teal;
+  margin: 0;
+  border: 2px solid black;
+}
+.profile-header p {
+  color: gray;
+  border: 2px solid black;
+}
+
+/* Hàng 2: 3 div ngang hàng */
+.profile-main {
+  display: flex;
+  justify-content: space-around; /* cách đều */
+  align-items: flex-start;
+  margin-top: 20px;
+  text-align: left;
+  border: 2px solid black;
+}
+
+.profile-main div {
+  flex: 1; /* chia đều không gian */
+  margin: 0 10px;
+  border: 2px solid black;
+}
+
+
+.profile-img {
+  max-width: 300px;
+  /* height: auto; */
+  /* text-align: center; */
+  /* justify-content: center; */
+  display: flex;
+}
+/* .profile-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;     Căn giữa dọc
+} */
+
+.profile-img img {
+  width: 300px;
+  height: auto;  
+  /* display: block; */
+}
+/* Sidebar */
+.sidebar {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar p {
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar p.active {
+  background-color: teal;
+}
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: teal;
+  margin-top: 20px;
+}
+
+h2 {
+  color: teal;
+  margin-bottom: 15px;
+}
+
+.abilities {
+  width: 70%;
+  margin: 30px auto;
+}
+
+.skills-container {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.skills-left, .skills-right {
+  width: 45%;
+}
+
+p {
+  margin: 8px 0;
+}
+
+.rating {
+  color: teal; /* màu ô vuông */
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.note {
+  margin: 20px 0;
+  font-style: italic;
+  color: gray;
+}
+
+.btn {
+  display: inline-block;
+  background: teal;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.btn:hover {
+  background: darkcyan;
+}

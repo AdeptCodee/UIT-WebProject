@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "title": "Introduction to Next.js",
+    "content": "Next.js is a React framework for production."
+  },
+  {
+    "id": "2",
+    "title": "Understanding SSG",
+    "content": "Static Site Generation pre-renders pages at build time."
+  },
+  {
+    "id": "3",
+    "title": "What is Routing?",
+    "content": "Next.js has a file-system based router built on the concept of pages."
+  },
+  {
+    "id": "4",
+    "title": "Server Side Rendering",
+    "content": "SSR renders pages on each request."
+  },
+  {
+    "id": "5",
+    "title": "Next.js API Routes",
+    "content": "API routes provide a solution to build your API with Next.js."
+  },
+  {
+    "id": "6",
+    "title": "Bai test thu nghiem",
+    "content": "Noi dung nay duoc them nong ma khong can khoi dong lai server."
+  }
+]

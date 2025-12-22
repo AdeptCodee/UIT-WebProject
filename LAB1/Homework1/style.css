@@ -1,0 +1,140 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow-x: hidden;
+}
+.content {
+  margin-left: 150px;
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+hr {
+  width: 100%;
+}
+h2,
+h3 {
+  color: teal;
+  font-size: 40px;
+}
+p {
+  font-size: 20px;
+}
+.profile-main {
+  display: flex;
+  justify-content: space-around;
+  text-align: left;
+  margin: 0px;
+  margin-top: 20px;
+  padding: 0px;
+}
+.profile-main div {
+  flex: 1;
+  margin: 10px;
+}
+
+.profile-header {
+  margin: 0px;
+}
+.img1 {
+  max-width: 400px;
+  display: flex;
+}
+.img1 img {
+  max-width: 400px;
+  height: auto;
+}
+
+.sidebar {
+  position: fixed;
+  height: 100%;
+  margin-left: 0px;
+  top: 0;
+  left: 0;
+  background-color: black;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  text-align: center;
+}
+.abilities a.btn {
+  display: inline-block;
+  background-color: rgb(1, 110, 86);
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+.sidebar a:hover {
+  background-color: gray;
+}
+.abilities h3 {
+  text-align: left;
+  /* padding-left: 10%; */
+}
+.skills-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* padding-left: 10%;
+  padding-right: 10%; */
+}
+.skills-container div {
+  margin-right: 10px;
+  flex: 1;
+  padding-left: 0px;
+  text-align: left;
+  max-width: 600px;
+}
+.rating {
+  color: teal;
+  float: right;
+}
+
+.abilities a.btn:hover {
+  background-color: rgb(5, 36, 29);
+}
+.experiences.profile-main {
+  display: flex;
+  flex-direction: column; /* chuyển hướng từ ngang sang dọc */
+  align-items: flex-start; 
+  text-align: left;
+  margin: 0px 0;
+  padding: 0;
+}
+.experiences .skills-container {
+  width: 100%;
+  display: flex;
+  gap: 200px;
+  margin-left: 0px;
+  
+  
+}
+.experiences .skills-container div {
+  margin-right: 0px;
+  padding-left: 0px;
+  text-align: left;
+  max-width: none;
+}
+.experiences .skills-container .skills-left {
+  margin-left: 0px;
+  width: 400px;
+  flex: 1;
+}
+.experiences .skills-container .skills-right {
+  flex: 4;
+  float: right;
+}
+
+/* div, section {
+  border: black 1px solid;
+} */
