@@ -1,20 +1,17 @@
 import React from "react";
 import SettingsToggle from "./SettingsToggle";
 
-// 2. Fetch data mock API (Simulate delay)
 async function getUserProfile() {
-  // Giả lập độ trễ 2 giây
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
   return {
-    name: "Nguyen",
+    name: "Nguyên - 23521065",
     role: "IT Student",
     major: "Web Development",
   };
 }
 
 export default async function DashboardPage() {
-  // Gọi hàm fetch data trực tiếp trong Server Component
   const user = await getUserProfile();
 
   return (
@@ -42,8 +39,6 @@ export default async function DashboardPage() {
       </div>
 
       <hr />
-
-      {/* 4. Embed Client Component inside Server Component */}
       <SettingsToggle />
     </div>
   );
