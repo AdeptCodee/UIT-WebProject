@@ -1,16 +1,18 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
-  // 1. Chỉ chặn các request gửi đến đường dẫn /api/secret
-  if (request.nextUrl.pathname.startsWith("/api/secret")) {
-    // 2. Lấy header x-api-key từ request
-    const apiKey = request.headers.get("x-api-key");
+const rateLimitMap = new Map();
 
-    // 3. So sánh với key trong file .env.local
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // ======================================================
+  // LOGIC CŨ: EXERCISE 3 (Vẫn giữ nguyên để thầy chấm)
+  // ======================================================
+  if (pathname.startsWith("/api/secret")) {
+    const apiKey = request.headers.get("x-api-key");
     const validKey = process.env.MY_SECRET_KEY;
 
-    // 4. Nếu sai key, trả về lỗi 401 Unauthorized ngay lập tức
     if (apiKey !== validKey) {
       return NextResponse.json(
         { message: "Unauthorized: Sai key hoặc thiếu key rồi!" },
@@ -19,11 +21,42 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // Nếu đúng key (hoặc không phải route cần bảo vệ), cho phép đi tiếp
+  // ======================================================
+  // LOGIC MỚI: SMALL PROJECT
+  // TẠM THỜI TẮT RATE LIMIT ĐỂ TEST CHỨC NĂNG CHAT TRƯỚC
+  // (Khi nào nộp bài muốn bật lại thì bỏ dấu comment /* ... */ đi)
+  // ======================================================
+
+  /* if (pathname.startsWith("/api/chat")) {
+    const ip = (request as any).ip || "127.0.0.1";
+    const limit = 5; 
+    const windowMs = 60 * 1000;
+
+    if (!rateLimitMap.has(ip)) {
+      rateLimitMap.set(ip, { count: 0, startTime: Date.now() });
+    }
+
+    const ipData = rateLimitMap.get(ip);
+
+    if (Date.now() - ipData.startTime > windowMs) {
+      ipData.count = 0;
+      ipData.startTime = Date.now();
+    }
+
+    ipData.count += 1;
+
+    if (ipData.count > limit) {
+      return NextResponse.json(
+        { message: "Too many requests. Please slow down." },
+        { status: 429 }
+      );
+    }
+  }
+  */
+
   return NextResponse.next();
 }
 
-// Cấu hình để middleware chỉ chạy trên path này (tối ưu hiệu năng)
 export const config = {
-  matcher: "/api/secret",
+  matcher: ["/api/secret", "/api/chat"],
 };
